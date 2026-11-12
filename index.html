@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Um avatar que reage ao som do seu microfone, diretamente no navegador."
+    />
+    <meta name="theme-color" content="#0f172a" />
+    <title>Avatar de áudio</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="panel">
+        <div class="header-row">
+          <div>
+            <p class="eyebrow">Sua voz, seu avatar</p>
+            <h1>Avatar que reage ao som</h1>
+          </div>
+          <span id="statusBadge" class="status-badge idle" aria-live="polite">Desligado</span>
+        </div>
+
+        <div class="avatar-stage">
+          <img id="avatarImage" src="assets/silent-avatar.png" alt="Avatar em silêncio" />
+        </div>
+
+        <div class="controls">
+          <button id="toggleMicrophone" class="primary">Ativar microfone</button>
+          <button id="toggleObsUi" class="secondary" aria-pressed="false">Ocultar controles</button>
+          <button id="stopMicrophone" class="secondary">Parar</button>
+        </div>
+
+        <form id="obsAuthForm" class="obs-auth-form" hidden>
+          <label for="obsPasswordInput">Senha do servidor WebSocket do OBS</label>
+          <input id="obsPasswordInput" type="password" autocomplete="current-password" />
+          <div class="obs-auth-actions">
+            <button type="submit" class="primary">Conectar</button>
+            <button id="cancelObsAuth" type="button" class="secondary">Cancelar</button>
+          </div>
+        </form>
+
+        <form id="obsInputForm" class="obs-input-form" hidden>
+          <label for="obsInputSelect">Selecione a fonte de áudio do Mixer do OBS</label>
+          <select id="obsInputSelect" required></select>
+          <button type="submit" class="primary">Usar esta fonte</button>
+        </form>
+
+        <div class="setting-group">
+          <label for="sensitivitySlider">Sensibilidade</label>
+          <div class="slider-wrap">
+            <input id="sensitivitySlider" type="range" min="1" max="100" value="100" />
+            <output id="sensitivityValue">100</output>
+          </div>
+        </div>
+
+        <p class="privacy-note">
+          O áudio é analisado no seu navegador: não é gravado nem enviado. O microfone só é
+          ativado quando você clica no botão.
+        </p>
+
+        <div class="image-settings">
+          <div class="file-picker">
+            <label for="silentInput">Avatar sem som (PNG ou SVG)</label>
+            <input id="silentInput" type="file" accept=".png,.svg,image/png,image/svg+xml" />
+          </div>
+
+          <div class="file-picker">
+            <label for="activeInput">Avatar com som (PNG ou SVG)</label>
+            <input id="activeInput" type="file" accept=".png,.svg,image/png,image/svg+xml" />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
